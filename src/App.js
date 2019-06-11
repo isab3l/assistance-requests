@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.css';
-import RequestForm from './RequestForm.js';
+import RequestForm from './components/RequestForm.js';
 
 
 function App() {
   return (
     <div className="container h-100">
       <div className="row h-100">
-        <div className="col-md-6 my-auto mx-auto">
+        <div className="col-md-8 my-auto mx-auto">
           <RequestForm/>
         </div>
       </div>

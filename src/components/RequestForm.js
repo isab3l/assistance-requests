@@ -8,7 +8,7 @@ class Form extends Component {
     constructor(props) {
         super(props);
 
-        this.initialState = {
+        this.state = {
             firstName: '',
             lastName: '',
             email: '',
@@ -21,7 +21,9 @@ class Form extends Component {
             loading: true,
             lastSuccess: {}
         };
+    }
 
+    componentWillMount() {
         ApiBridge.getServiceTypes()
             .then(result => {
                 this.setState({ 
@@ -29,9 +31,8 @@ class Form extends Component {
                     loading: false
                  });
                  this.setLastSuccess();
-            })
-
-        this.state = this.initialState;
+            }
+        );
     }
 
     handleChange = event => {
@@ -56,7 +57,7 @@ class Form extends Component {
             .then(data => {
                 this.setState({
                     message: data.message,
-                    status: data.status === 201 ? "info" : "warning",
+                    status:  data.status === 201 ? "info" : "warning",
                     loading: false
                 })
 
@@ -69,9 +70,9 @@ class Form extends Component {
     setLastSuccess = () => {
         this.setState({
             lastSuccess: {
-                firstName: this.state.firstName,
-                lastName: this.state.lastName,
-                email: this.state.email,
+                firstName:   this.state.firstName,
+                lastName:    this.state.lastName,
+                email:       this.state.email,
                 serviceType: this.state.serviceType,
                 requestBody: this.state.requestBody
             }
@@ -96,7 +97,7 @@ class Form extends Component {
                     message={this.state.message}
                     status={this.state.status} />
 
-                <h3 className="my-3">New Assistance Request</h3> 
+                <h4 className="my-3">New Assistance Request</h4> 
 
                 <form onSubmit={this.onFormSubmit}> 
                     <div className="form-group">
@@ -164,9 +165,9 @@ class Form extends Component {
                         <label htmlFor="acceptTerms" className="form-check-label">I accept the terms of service.</label>
 
                     </div>
-                    <div className="row justify-content-end px-3 my-2">
+                    <div className="row justify-content-end px-3 my-3">
                         <button 
-                            className="btn btn-primary"
+                            className="btn btn-primary btn-block"
                             type="submit"
                             disabled={this.state.loading || this.isLastSuccess()}>
                                 Get Assistance
